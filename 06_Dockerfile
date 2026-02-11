@@ -1,0 +1,26 @@
+FROM python:3.10-slim
+
+# 1) Update and install any system packages needed for pypdf or whatever else
+# (If you need additional system-level deps; here is just an example)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# 2) Copy your code into the container
+WORKDIR /app
+COPY . /app
+
+# 3) Install only the necessary Python libraries
+RUN pip install --no-cache-dir \
+    google-cloud-aiplatform \
+    google-cloud-bigquery \
+    google-cloud-storage \
+    google-generativeai \
+    langchain-google-vertexai \
+    "langchain-google-community[featurestore,bigquery]" \
+    gradio
+
+# 4) Expose port if gradio is running on 7860, for example
+EXPOSE 7860
+
+# 5) Set the entrypoint or default command
+CMD ["python", "05_app_gradio.py"]
