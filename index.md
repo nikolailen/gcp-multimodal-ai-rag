@@ -41,30 +41,6 @@ Traditional RAG tutorials usually rely on splitting documents into fixed-size, o
 
 ![Layout parsing concept]({{ '/images/2-layout.jpeg' | relative_url }})
 
-Very quickly I arrived to understanding that to achieve a decent result I should stick to Object‑centric chunking. The approach with wich the parser should clearly understand parts of the page and classify it as separate object with all necessary data. For this I needed a tool that could clearly understand the layout of the page. Plus keep in mind that a portion of the presentations where image based (with no OCR). As expected, all standard python libraries like PyPDF2, PymuPDF, PDFPlumber turned out to be useless for this task. The only python library that looked more relevant solution was unstructured.io that was hyping at that point of time. But what about my task to have a textual description of graphs, diagrams, images? Nothing, you had to create a separate pipeline for that. The same thing was with Google Cloud Document AI Layout Parser. The parsing quality with object dection and returning json was really nice, I think in terms of the parsing quality it was the best, but still it's just parser and that's it. But beyond that the price! $0.01 per page! If take one document 100 pages multiple by 10000 we end up with 10k $ for just parcing! 
-Meanwile here comes the news: Google slashed the price of Gemini 1.5 Flash. Input token costs dropped by 78% to about US$0.075 per million tokens and output costs fell to about US$0.30 per million tokens for prompts under 128 k tokens. Moreover they treated each document page as equivalent to 258 tokens. 
-
-
-Cost = 258 × (0.075 / 1,000,000) = $0.00001935 per page (≈ 0.000019 USD)
-
-Output cost formula:
-
-output_tokens × (0.30 / 1,000,000)
-
-
-Typical page (~650 output tokens): $0.00001935 + $0.000195 = $0.00021435. Using your $0.00021435 per page estimate:
-
-Pages per doc: 100
-
-Number of docs: 10,000
-
-Total pages = 100 × 10,000 = 1,000,000 pages
-
-Total cost = 1,000,000 × $0.00021435 = $214.35
- 
-Feel the difference! But the pricing was not the only reason why custom parser based on Gemini 1.5 Flash looked like a plan.   
-
----
 I quickly realized that to get decent results I needed to stick with **object-centric chunking**, an approach where the parser can identify distinct regions on a page and treat each one as a separate object, complete with the metadata I care about. That meant I needed a tool that could reliably understand page layout. And there was another catch: a chunk of the presentations were **image-based**, with **no OCR**.
 
 As expected, the usual Python suspects like PyPDF2, PyMuPDF, PDFPlumber were basically useless for this. The only library that looked somewhat promising at the time was **unstructured.io**, which was getting a lot of hype. But it still didn’t solve my core requirement: generating **textual descriptions of graphs, diagrams, and images**. For that, you had to build a separate pipeline.
