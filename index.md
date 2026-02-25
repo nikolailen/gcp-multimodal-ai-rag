@@ -960,5 +960,6 @@ Feel free to connect on [LinkedIn](https://www.linkedin.com/in/niklen/)!
 ## Contact
 
 - Nikolai Len
+- 💻 Code repository: [ai_knowledge_base](https://github.com/nikolailen/ai_knowledge_base)
 - 👤 [LinkedIn](https://www.linkedin.com/in/niklen/)
 
