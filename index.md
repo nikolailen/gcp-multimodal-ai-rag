@@ -961,5 +961,4 @@ Feel free to connect on [LinkedIn](https://www.linkedin.com/in/niclen/)!
 
 - [Nicolas Len](https://www.linkedin.com/in/niclen/)
 - 💻 Code repository: [gcp-multimodal-ai-rag](https://github.com/nicolas-len/gcp-multimodal-ai-rag)
-- 👤 [LinkedIn](https://www.linkedin.com/in/niclen/)
 
